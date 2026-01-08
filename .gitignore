@@ -1,18 +1,29 @@
-# Python
-__pycache__/
-*.py[cod]
+# Backend
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.env
+backend/**/.env
+*.pyc
+*.pyo
+*.pyd
+.Python
 
-# Virtual Environment
-venv/
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
 
-# Environment variables
-.env
-
-# Node
-node_modules/
-
-# VS Code
+# IDE
 .vscode/
+.idea/
+*.swp
+*.swo
 
 # OS
 .DS_Store
+Thumbs.db
+
+# Logs
+*.log
