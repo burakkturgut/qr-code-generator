@@ -9,8 +9,19 @@ const ProtectedRoute = ({ children }) => {
 };
 
 const AppRouter = () => {
+    // Token kontrolü ile ana sayfa yönlendirmesi
+    const token = localStorage.getItem("access_token");
+
     return (
         <Routes>
+            {/* Ana Sayfa - Token varsa QR'a, yoksa Login'e yönlendir */}
+            <Route
+                path="/"
+                element={
+                    token ? <Navigate to="/qr" replace /> : <Navigate to="/login" replace />
+                }
+            />
+
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
@@ -22,6 +33,9 @@ const AppRouter = () => {
                     </ProtectedRoute>
                 }
             />
+
+            {/* 404 - Bilinmeyen route'lar için */}
+            <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     );
 };
