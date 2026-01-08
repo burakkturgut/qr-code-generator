@@ -3,9 +3,12 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import QrGenerator from "../pages/QrGenerator";
 
-function AppRouter() {
-    const isAuthenticated = false; // şimdilik yaptım değiştircem unutma
+const ProtectedRoute = ({ children }) => {
+    const token = localStorage.getItem("access_token");
+    return token ? children : <Navigate to="/login" />;
+};
 
+const AppRouter = () => {
     return (
         <Routes>
             <Route path="/login" element={<Login />} />
@@ -14,13 +17,13 @@ function AppRouter() {
             <Route
                 path="/qr"
                 element={
-                    isAuthenticated ? <QrGenerator /> : <Navigate to="/login" />
+                    <ProtectedRoute>
+                        <QrGenerator />
+                    </ProtectedRoute>
                 }
             />
-
-            <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
     );
-}
+};
 
 export default AppRouter;

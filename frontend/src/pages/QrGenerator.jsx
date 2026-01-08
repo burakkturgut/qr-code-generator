@@ -1,9 +1,14 @@
-import React from 'react'
+import { useEffect } from "react";
+import api from "../services/api";
 
-function QrGenerator() {
-    return (
-        <div>QrGenerator</div>
-    )
-}
+const QrGenerator = () => {
+    useEffect(() => {
+        api.get("/auth/profile")
+            .then((res) => console.log(res.data))
+            .catch((err) => console.error(err));
+    }, []);
 
-export default QrGenerator
+    return <h2>QR Generator</h2>;
+};
+
+export default QrGenerator;
