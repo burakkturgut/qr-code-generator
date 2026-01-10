@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-db = SQLAlchemy()
+db = SQLAlchemy()  # ORM moturnu oluşturdum bu sayede SQl yazmadan DB ile çalışmamı sağladı.
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -11,8 +11,12 @@ class User(db.Model):
     password = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    # İlişki: Bir kullanıcının birden fazla QR kodu olabilir
-    qr_codes = db.relationship('QRCode', backref='user', lazy=True, cascade='all, delete-orphan')
+    #  Bir kullanıcının birden fazla QR kodu olabilir
+    qr_codes = db.relationship('QRCode' , # ilişki kuracağı tablonun ismi
+                               backref='user', 
+                               lazy=True, 
+                               cascade='all, delete-orphan' # Bu kısım önemli kullanıcı silinirse qr kodda silinir ve db çöpliğe dönmez.
+                               ) 
     
     def __repr__(self):
         return f'<User {self.email}>'

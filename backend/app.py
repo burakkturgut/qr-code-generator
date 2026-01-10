@@ -21,7 +21,7 @@ app.register_blueprint(qr_bp, url_prefix="/api/qr")
 # Veritabanı tablolarını oluştur
 with app.app_context():
     db.create_all()
-    print("✅ Database tables created!")
+    print(" Database tables created!")
 
 @app.route("/test")
 def test():

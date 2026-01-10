@@ -1,8 +1,11 @@
 import { useState } from "react";
 import api from "../services/api";
 import { useNavigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "../components/LanguageSwitcher";
 
 const Login = () => {
+    const { t } = useTranslation();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -14,7 +17,7 @@ const Login = () => {
         setError("");
 
         if (!email || !password) {
-            setError("Tüm alanları doldurun!");
+            setError(t('auth.fillAllFields'));
             return;
         }
 
@@ -29,7 +32,7 @@ const Login = () => {
             localStorage.setItem("access_token", res.data.access_token);
             navigate("/qr");
         } catch (err) {
-            setError(err.response?.data?.msg || "Giriş başarısız!");
+            setError(err.response?.data?.msg || t('auth.invalidCredentials'));
         } finally {
             setLoading(false);
         }
@@ -37,6 +40,11 @@ const Login = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 p-4">
+            {/* Language Switcher - Sağ Üst Köşe */}
+            <div className="absolute top-4 right-4">
+                <LanguageSwitcher />
+            </div>
+
             <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
                 {/* Logo/Header */}
                 <div className="text-center mb-8">
@@ -45,8 +53,8 @@ const Login = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
                         </svg>
                     </div>
-                    <h1 className="text-3xl font-bold text-gray-800">QR Oluşturucu</h1>
-                    <p className="text-gray-500 mt-2">Hesabınıza giriş yapın</p>
+                    <h1 className="text-3xl font-bold text-gray-800">{t('auth.loginTitle')}</h1>
+                    <p className="text-gray-500 mt-2">{t('auth.loginSubtitle')}</p>
                 </div>
 
                 {/* Error Alert */}
@@ -66,7 +74,7 @@ const Login = () => {
                     {/* Email Input */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Email Adresi
+                            {t('auth.email')}
                         </label>
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -76,7 +84,7 @@ const Login = () => {
                             </div>
                             <input
                                 type="email"
-                                placeholder="ornek@email.com"
+                                placeholder={t('auth.emailPlaceholder')}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200 outline-none"
@@ -87,7 +95,7 @@ const Login = () => {
                     {/* Password Input */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Şifre
+                            {t('auth.password')}
                         </label>
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -97,7 +105,7 @@ const Login = () => {
                             </div>
                             <input
                                 type="password"
-                                placeholder="••••••••"
+                                placeholder={t('auth.passwordPlaceholder')}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200 outline-none"
@@ -117,10 +125,10 @@ const Login = () => {
                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
-                                Giriş Yapılıyor...
+                                {t('auth.loggingIn')}
                             </span>
                         ) : (
-                            "Giriş Yap"
+                            t('auth.login')
                         )}
                     </button>
                 </form>
@@ -128,12 +136,12 @@ const Login = () => {
                 {/* Divider */}
                 <div className="mt-6 text-center">
                     <p className="text-gray-600">
-                        Hesabınız yok mu?{" "}
+                        {t('auth.dontHaveAccount')}{" "}
                         <Link
                             to="/register"
                             className="text-purple-600 font-semibold hover:text-purple-700 transition duration-200"
                         >
-                            Kayıt Ol
+                            {t('auth.register')}
                         </Link>
                     </p>
                 </div>

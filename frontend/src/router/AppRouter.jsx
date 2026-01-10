@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import QrGenerator from "../pages/QrGenerator";
+import Settings from "../pages/Settings";
 
 const ProtectedRoute = ({ children }) => {
     const token = localStorage.getItem("access_token");
@@ -30,6 +31,15 @@ const AppRouter = () => {
                 element={
                     <ProtectedRoute>
                         <QrGenerator />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/settings"
+                element={
+                    <ProtectedRoute>
+                        <Settings />
                     </ProtectedRoute>
                 }
             />

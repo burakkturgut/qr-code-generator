@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import api from "../services/api";
+import LanguageSwitcher from "../components/LanguageSwitcher";
 
 const Register = () => {
+    const { t } = useTranslation();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -15,17 +18,17 @@ const Register = () => {
         setError("");
 
         if (!email || !password || !confirmPassword) {
-            setError("Tüm alanları doldurun!");
+            setError(t('auth.fillAllFields'));
             return;
         }
 
         if (password !== confirmPassword) {
-            setError("Şifreler eşleşmiyor!");
+            setError(t('auth.passwordMismatch'));
             return;
         }
 
         if (password.length < 6) {
-            setError("Şifre en az 6 karakter olmalı!");
+            setError(t('auth.passwordTooShort'));
             return;
         }
 
@@ -37,7 +40,6 @@ const Register = () => {
                 password,
             });
 
-            // Success message
             navigate("/login", {
                 state: { message: "Kayıt başarılı! Giriş yapabilirsiniz." }
             });
@@ -50,6 +52,11 @@ const Register = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 p-4">
+            {/* Language Switcher */}
+            <div className="absolute top-4 right-4">
+                <LanguageSwitcher />
+            </div>
+
             <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
                 {/* Logo/Header */}
                 <div className="text-center mb-8">
@@ -58,8 +65,8 @@ const Register = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                         </svg>
                     </div>
-                    <h1 className="text-3xl font-bold text-gray-800">Yeni Hesap</h1>
-                    <p className="text-gray-500 mt-2">QR dünyasına katılın</p>
+                    <h1 className="text-3xl font-bold text-gray-800">{t('auth.registerTitle')}</h1>
+                    <p className="text-gray-500 mt-2">{t('auth.registerSubtitle')}</p>
                 </div>
 
                 {/* Error Alert */}
@@ -79,7 +86,7 @@ const Register = () => {
                     {/* Email Input */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Email Adresi
+                            {t('auth.email')}
                         </label>
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -89,7 +96,7 @@ const Register = () => {
                             </div>
                             <input
                                 type="email"
-                                placeholder="ornek@email.com"
+                                placeholder={t('auth.emailPlaceholder')}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 outline-none"
@@ -100,7 +107,7 @@ const Register = () => {
                     {/* Password Input */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Şifre
+                            {t('auth.password')}
                         </label>
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -110,7 +117,7 @@ const Register = () => {
                             </div>
                             <input
                                 type="password"
-                                placeholder="En az 6 karakter"
+                                placeholder={t('auth.passwordMinLength')}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 outline-none"
@@ -121,7 +128,7 @@ const Register = () => {
                     {/* Confirm Password Input */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Şifre Tekrar
+                            {t('auth.confirmPassword')}
                         </label>
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -131,7 +138,7 @@ const Register = () => {
                             </div>
                             <input
                                 type="password"
-                                placeholder="Şifreyi tekrar girin"
+                                placeholder={t('auth.confirmPassword')}
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 outline-none"
@@ -152,9 +159,9 @@ const Register = () => {
                                     password.length < 8 ? 'text-yellow-600' :
                                         'text-green-600'
                                 }`}>
-                                {password.length < 6 ? 'Zayıf şifre' :
-                                    password.length < 8 ? 'Orta güçlü şifre' :
-                                        'Güçlü şifre'}
+                                {password.length < 6 ? t('auth.weakPassword') :
+                                    password.length < 8 ? t('auth.mediumPassword') :
+                                        t('auth.strongPassword')}
                             </p>
                         </div>
                     )}
@@ -171,10 +178,10 @@ const Register = () => {
                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
-                                Kaydediliyor...
+                                {t('auth.registering')}
                             </span>
                         ) : (
-                            "Kayıt Ol"
+                            t('auth.register')
                         )}
                     </button>
                 </form>
@@ -182,12 +189,12 @@ const Register = () => {
                 {/* Divider */}
                 <div className="mt-6 text-center">
                     <p className="text-gray-600">
-                        Zaten hesabınız var mı?{" "}
+                        {t('auth.alreadyHaveAccount')}{" "}
                         <Link
                             to="/login"
                             className="text-blue-600 font-semibold hover:text-blue-700 transition duration-200"
                         >
-                            Giriş Yap
+                            {t('auth.login')}
                         </Link>
                     </p>
                 </div>
