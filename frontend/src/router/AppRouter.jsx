@@ -4,6 +4,9 @@ import Register from "../pages/Register";
 import QrGenerator from "../pages/QrGenerator";
 import Settings from "../pages/Settings";
 
+
+
+
 const ProtectedRoute = ({ children }) => {
     const token = localStorage.getItem("access_token");
     return token ? children : <Navigate to="/login" />;
@@ -43,7 +46,6 @@ const AppRouter = () => {
                     </ProtectedRoute>
                 }
             />
-
             {/* 404 - Bilinmeyen route'lar için */}
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

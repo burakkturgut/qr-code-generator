@@ -33,3 +33,4 @@ class QRCode(db.Model):
     
     def __repr__(self):
         return f'<QRCode {self.id} - User {self.user_id}>'
+

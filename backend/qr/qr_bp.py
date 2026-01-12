@@ -78,7 +78,7 @@ def generate_qr():
         return jsonify({'message': 'Data alanı zorunlu!'}), 400
 
     try:
-        # Renkli QR kod oluştur
+        # Kullanıcının girdiği veriyle QR oluştur
         img = create_styled_qr(data, fg_color, bg_color, size, style)
         
         # Base64 olarak encode et

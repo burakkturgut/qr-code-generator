@@ -5,12 +5,14 @@ from qr.qr_bp import qr_bp
 from auth import auth_bp
 import config
 from models import db
+from flask_migrate import Migrate  
 
 app = Flask(__name__)
 app.config.from_object(config)
 
 # Database initialize
 db.init_app(app)
+migrate = Migrate(app, db)
 
 CORS(app)
 jwt = JWTManager(app)
@@ -28,4 +30,6 @@ def test():
     return "Backend calisiyor"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

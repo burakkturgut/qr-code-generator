@@ -161,3 +161,4 @@ def delete_account():
     db.session.commit()
     
     return jsonify({"msg": "Hesap başarıyla silindi"})
+    
