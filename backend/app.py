@@ -18,11 +18,15 @@ migrate = Migrate(app, db)
 # CORS - Frontend URL'ini ekle
 CORS(app, resources={
     r"/*": {
-        "origins": ["https://qr-frontend.vercel.app", "http://localhost:5173"],
-        "methods": ["GET", "POST", "PUT", "DELETE"],
+        "origins": [
+            "https://qr-code-generator-seven-puce.vercel.app",
+            "http://localhost:5173"
+        ],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"]
     }
 })
+
 
 jwt = JWTManager(app)
 
