@@ -19,7 +19,7 @@ migrate = Migrate(app, db)
 CORS(app, resources={
     r"/*": {
         "origins": [
-            "https://qr-code-generator-pied-eight.vercel.app",
+            "https://qrolusturucu.vercel.app",
             "http://localhost:5173"
         ],
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
