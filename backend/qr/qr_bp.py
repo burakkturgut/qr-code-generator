@@ -1,15 +1,14 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 import qrcode
-from PIL import Image, ImageDraw
+from PIL import Image
 import io
 import base64
-from models import db, QRCode, User
+from models import db, QRCode
 
 qr_bp = Blueprint('qr_bp', __name__)
 
 def create_styled_qr(data, fg_color, bg_color, size, style):
-    """Özel stil ile QR kod oluştur"""
     
     # Temel QR kod oluştur
     qr = qrcode.QRCode(
@@ -28,39 +27,7 @@ def create_styled_qr(data, fg_color, bg_color, size, style):
     if not isinstance(img, Image.Image):
         img = img.convert('RGB')
     
-    # Stil uygulamaları
-    if style == "rounded":
-        img = apply_rounded_style(img, fg_color, bg_color)
-    elif style == "circle":
-        img = apply_circle_style(img, fg_color, bg_color)
-    elif style == "gapped":
-        img = apply_gapped_style(img, fg_color, bg_color)
-    
     return img
-
-def apply_rounded_style(img, fg_color, bg_color):
-    """Yuvarlatılmış köşeler uygula"""
-    try:
-        # Basit versiyon - sadece renkleri uygula
-        return img
-    except:
-        return img
-
-def apply_circle_style(img, fg_color, bg_color):
-    """Daire şekli uygula"""
-    try:
-        # Basit versiyon - sadece renkleri uygula
-        return img
-    except:
-        return img
-
-def apply_gapped_style(img, fg_color, bg_color):
-    """Aralıklı stil uygula"""
-    try:
-        # Basit versiyon - sadece renkleri uygula
-        return img
-    except:
-        return img
 
 @qr_bp.route("/generate", methods=['POST'])
 @jwt_required()
@@ -101,7 +68,7 @@ def generate_qr():
         print(f"QR oluşturma hatası: {str(e)}")
         return jsonify({'message': f'QR kod oluşturulamadı: {str(e)}'}), 500
 
-
+# Kullanıcının oluşturduğu tüm QR kodları listeleyen endpoint.
 @qr_bp.route("/my-qr-codes", methods=['GET'])
 @jwt_required()
 def get_my_qr_codes():
@@ -120,7 +87,7 @@ def get_my_qr_codes():
     
     return jsonify(result), 200
 
-
+# QR kodu silen endpoint.
 @qr_bp.route("/delete/<int:qr_id>", methods=['DELETE'])
 @jwt_required()
 def delete_qr(qr_id):

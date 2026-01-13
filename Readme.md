@@ -52,7 +52,7 @@ Canlı : https://qr-code-generator-pied-eight.vercel.app
 
 ---
 
-##  Teknoloji Yığını
+##  Kullanılan Teknolojiler
 
 ### Frontend
 - **React 19.2.5** - Modern UI kütüphanesi
@@ -124,7 +124,7 @@ Ticari kullanım veya yeniden dağıtım için lütfen iletişime geçiniz.
 
 ##  Geliştirici
 
-**[BURAK TURGUT]**
+**BURAK TURGUT**
 - GitHub: [@burakkturgut](https://github.com/burakkturgut)
 - LinkedIn: [linkedin.com/in/burakkturgut](https://www.linkedin.com/in/burakkturgut)
 - Email: burak.turgut.dev@gmail.com
@@ -136,5 +136,5 @@ Ticari kullanım veya yeniden dağıtım için lütfen iletişime geçiniz.
 </div>
 
 <div align="center">
-  Made with by [Burak Turgut]
+  Made with by Burak Turgut
 </div>

@@ -11,7 +11,7 @@ import os
 app = Flask(__name__)
 app.config.from_object(config)
 
-# Database initialize
+# SQLAlchemy ORM kullanarak DB bağlantısı kurulumu
 db.init_app(app)
 migrate = Migrate(app, db)
 

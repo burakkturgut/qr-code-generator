@@ -66,32 +66,27 @@ const Register = () => {
 
     return (
         <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4" style={{ backgroundColor: '#1a1a1a' }}>
-            {/* Animated Background Pattern */}
+
             <div className="absolute inset-0 opacity-10">
                 <div className="absolute inset-0" style={{
                     backgroundImage: `repeating-linear-gradient(45deg, #8B1538 0px, #8B1538 1px, transparent 1px, transparent 20px)`,
                 }}></div>
             </div>
 
-            {/* Gradient Orbs */}
             <div className="absolute top-20 right-20 w-96 h-96 rounded-full filter blur-3xl opacity-20 animate-pulse" style={{ backgroundColor: '#8B1538' }}></div>
             <div className="absolute bottom-20 left-20 w-96 h-96 rounded-full filter blur-3xl opacity-15 animate-pulse" style={{ backgroundColor: '#D4AF37', animationDelay: '1s' }}></div>
 
-            {/* Language Switcher */}
             <div className="absolute top-6 right-6 z-50">
                 <div className="backdrop-blur-md bg-white/5 rounded-xl p-1 border shadow-2xl" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }}>
                     <LanguageSwitcher />
                 </div>
             </div>
 
-            {/* Main Card */}
             <div className="relative z-10 w-full max-w-md">
                 <div className="backdrop-blur-xl bg-white/5 rounded-2xl shadow-2xl border overflow-hidden" style={{ borderColor: 'rgba(212, 175, 55, 0.2)' }}>
-                    {/* Top Border */}
                     <div className="h-1" style={{ background: 'linear-gradient(90deg, #8B1538 0%, #D4AF37 50%, #8B1538 100%)' }}></div>
 
                     <div className="p-8">
-                        {/* Logo Section */}
                         <div className="text-center mb-8">
                             <div className="inline-flex items-center justify-center w-20 h-20 rounded-xl mb-4 shadow-lg transform hover:scale-110 transition-transform duration-500" style={{
                                 background: 'linear-gradient(135deg, #D4AF37 0%, #8B1538 100%)',
@@ -108,8 +103,6 @@ const Register = () => {
                                 {t('auth.registerSubtitle')}
                             </p>
                         </div>
-
-                        {/* Error Alert */}
                         {error && (
                             <div className="mb-6 backdrop-blur-md rounded-xl p-4 animate-shake border" style={{
                                 backgroundColor: 'rgba(139, 21, 56, 0.2)',
@@ -124,9 +117,8 @@ const Register = () => {
                             </div>
                         )}
 
-                        {/* Form */}
                         <form onSubmit={handleSubmit} className="space-y-5">
-                            {/* Email Input */}
+
                             <div className="relative group">
                                 <div className={`absolute -inset-0.5 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-500 ${emailFocused ? 'opacity-40' : ''}`} style={{ backgroundColor: '#D4AF37' }}></div>
                                 <div className="relative">
@@ -147,8 +139,8 @@ const Register = () => {
                                     <label
                                         htmlFor="email"
                                         className={`absolute left-4 transition-all duration-300 pointer-events-none ${emailFocused || email
-                                                ? '-top-6 text-xs font-semibold'
-                                                : 'top-4 text-sm'
+                                            ? '-top-6 text-xs font-semibold'
+                                            : 'top-4 text-sm'
                                             }`}
                                         style={{ color: emailFocused ? '#D4AF37' : '#cbd5e1' }}
                                     >
@@ -162,7 +154,6 @@ const Register = () => {
                                 </div>
                             </div>
 
-                            {/* Password Input */}
                             <div className="relative group">
                                 <div className={`absolute -inset-0.5 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-500 ${passwordFocused ? 'opacity-40' : ''}`} style={{ backgroundColor: '#8B1538' }}></div>
                                 <div className="relative">
@@ -183,8 +174,8 @@ const Register = () => {
                                     <label
                                         htmlFor="password"
                                         className={`absolute left-4 transition-all duration-300 pointer-events-none ${passwordFocused || password
-                                                ? '-top-6 text-xs font-semibold'
-                                                : 'top-4 text-sm'
+                                            ? '-top-6 text-xs font-semibold'
+                                            : 'top-4 text-sm'
                                             }`}
                                         style={{ color: passwordFocused ? '#8B1538' : '#cbd5e1' }}
                                     >
@@ -216,7 +207,6 @@ const Register = () => {
                                 </div>
                             </div>
 
-                            {/* Password Strength Indicator */}
                             {strength && (
                                 <div className="space-y-2">
                                     <div className="h-2 bg-white/10 rounded-full overflow-hidden backdrop-blur-md">
@@ -235,7 +225,6 @@ const Register = () => {
                                 </div>
                             )}
 
-                            {/* Confirm Password Input */}
                             <div className="relative group">
                                 <div className={`absolute -inset-0.5 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-500 ${confirmFocused ? 'opacity-40' : ''}`} style={{ backgroundColor: '#D4AF37' }}></div>
                                 <div className="relative">
@@ -256,8 +245,8 @@ const Register = () => {
                                     <label
                                         htmlFor="confirmPassword"
                                         className={`absolute left-4 transition-all duration-300 pointer-events-none ${confirmFocused || confirmPassword
-                                                ? '-top-6 text-xs font-semibold'
-                                                : 'top-4 text-sm'
+                                            ? '-top-6 text-xs font-semibold'
+                                            : 'top-4 text-sm'
                                             }`}
                                         style={{ color: confirmFocused ? '#D4AF37' : '#cbd5e1' }}
                                     >
@@ -289,7 +278,6 @@ const Register = () => {
                                 </div>
                             </div>
 
-                            {/* Submit Button */}
                             <button
                                 type="submit"
                                 disabled={loading}
@@ -317,7 +305,6 @@ const Register = () => {
                             </button>
                         </form>
 
-                        {/* Divider */}
                         <div className="mt-8 text-center">
                             <p className="text-sm" style={{ color: '#cbd5e1' }}>
                                 {t('auth.alreadyHaveAccount')}{" "}
@@ -333,11 +320,9 @@ const Register = () => {
                     </div>
                 </div>
 
-                {/* Bottom Glow */}
                 <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-3/4 h-8 blur-2xl rounded-full opacity-30" style={{ backgroundColor: '#8B1538' }}></div>
             </div>
 
-            {/* Animations */}
             <style jsx>{`
                 @keyframes shake {
                     0%, 100% { transform: translateX(0); }

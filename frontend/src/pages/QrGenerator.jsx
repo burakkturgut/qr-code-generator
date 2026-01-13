@@ -175,7 +175,7 @@ const QrGenerator = () => {
     // PDF Export fonksiyonu
     const exportToPdf = async () => {
         if (selectedQrIds.length === 0) {
-            showToastMessage("⚠️ Lütfen en az bir QR kod seçin!");
+            showToastMessage(" Lütfen en az bir QR kod seçin!");
             return;
         }
 
@@ -217,12 +217,12 @@ const QrGenerator = () => {
 
             // PDF'i indir
             pdf.save(`qr-codes-${new Date().getTime()}.pdf`);
-            showToastMessage(`✅ ${selectedQrs.length} QR kod PDF olarak indirildi!`);
+            showToastMessage(` ${selectedQrs.length} QR kod PDF olarak indirildi!`);
             setSelectedQrIds([]); // Seçimi temizle
 
         } catch (error) {
             console.error('PDF oluşturma hatası:', error);
-            showToastMessage("❌ PDF oluşturulamadı!");
+            showToastMessage(" PDF oluşturulamadı!");
         } finally {
             setIsExporting(false);
         }
@@ -250,7 +250,6 @@ const QrGenerator = () => {
         `}</style>
                 </>
             )}
-            {/* Header - Glassmorphism with Bordo-Gold */}
             <header className="backdrop-blur-xl bg-white/80 shadow-lg sticky top-0 z-50 border-b" style={{ borderColor: 'rgba(139, 21, 56, 0.1)' }}>
                 <div className="h-1" style={{ background: 'linear-gradient(90deg, #8B1538 0%, #D4AF37 50%, #8B1538 100%)' }}></div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -266,7 +265,7 @@ const QrGenerator = () => {
                             <h1 className="text-2xl font-bold" style={{ color: '#1a1a1a' }}>{t('dashboard.title')}</h1>
                         </div>
                         <div className="flex items-center space-x-3 px-2 sm:px-4">
-                            {/* <LanguageSwitcher />  silindi */}
+                            {/* <LanguageSwitcher />  silindi ilerde eklenebilir! */}
                             <button
                                 onClick={() => navigate("/settings")}
                                 className="flex items-center space-x-2 px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:shadow-lg"
@@ -298,7 +297,7 @@ const QrGenerator = () => {
             </header>
 
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {/* Stats Cards */}
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div className="bg-white rounded-2xl p-6 border transition-all duration-300 hover:shadow-xl group" style={{ borderColor: '#e5e7eb' }}>
                         <div className="flex items-center justify-between">
@@ -370,7 +369,6 @@ const QrGenerator = () => {
                     </div>
                 </div>
 
-                {/* QR Generator Section */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8 border" style={{ borderColor: '#e5e7eb' }}>
                     <div className="flex items-center space-x-3 mb-6">
                         <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{
@@ -403,7 +401,6 @@ const QrGenerator = () => {
                             />
                         </div>
 
-                        {/* QR Özelleştirme */}
                         <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 border" style={{ borderColor: '#e5e7eb' }}>
                             <h3 className="text-lg font-bold mb-4 flex items-center" style={{ color: '#1a1a1a' }}>
                                 <svg className="w-5 h-5 mr-2" style={{ color: '#8B1538' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -413,7 +410,7 @@ const QrGenerator = () => {
                             </h3>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                {/* QR Rengi */}
+
                                 <div>
                                     <label className="block text-sm font-semibold mb-2" style={{ color: '#374151' }}>
                                         {t('qrGenerator.qrColor')}
@@ -435,8 +432,6 @@ const QrGenerator = () => {
                                         />
                                     </div>
                                 </div>
-
-                                {/* Arka Plan */}
                                 <div>
                                     <label className="block text-sm font-semibold mb-2" style={{ color: '#374151' }}>
                                         {t('qrGenerator.bgColor')}
@@ -460,7 +455,6 @@ const QrGenerator = () => {
                                 </div>
                             </div>
 
-                            {/* Boyut */}
                             <div className="mt-6">
                                 <label className="block text-sm font-semibold mb-2" style={{ color: '#374151' }}>
                                     {t('qrGenerator.qrSize')}: {qrSize}
@@ -481,7 +475,6 @@ const QrGenerator = () => {
                                 </div>
                             </div>
 
-                            {/* Hızlı Renkler */}
                             <div className="mt-6">
                                 <label className="block text-sm font-semibold mb-3" style={{ color: '#374151' }}>
                                     {t('qrGenerator.quickColors')}
@@ -574,7 +567,6 @@ const QrGenerator = () => {
                     )}
                 </div>
 
-                {/* QR History */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 border" style={{ borderColor: '#e5e7eb' }}>
                     <div className="flex justify-between items-center mb-6">
                         <div className="flex items-center space-x-3">
@@ -607,7 +599,6 @@ const QrGenerator = () => {
                         </button>
                     </div>
 
-                    {/* ⬇️ BURAYI EKLE - Toplu İşlem Butonları ⬇️ */}
                     {showHistory && filteredQrCodes.length > 0 && (
                         <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-4 mb-6 flex flex-wrap items-center justify-between gap-4">
                             <div className="flex items-center space-x-4">
@@ -666,7 +657,7 @@ const QrGenerator = () => {
 
                     {showHistory && (
                         <div>
-                            {/* Filters */}
+
                             <div className="bg-gray-50 rounded-xl p-4 mb-6 space-y-4">
                                 <div>
                                     <label className="block text-sm font-semibold mb-2" style={{ color: '#374151' }}>
@@ -743,7 +734,6 @@ const QrGenerator = () => {
                                 </div>
                             </div>
 
-                            {/* QR Grid */}
                             {filteredQrCodes.length === 0 ? (
                                 <div className="text-center py-12">
                                     <svg className="w-24 h-24 mx-auto mb-4" style={{ color: '#d1d5db' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -763,7 +753,6 @@ const QrGenerator = () => {
                                             className="bg-white border rounded-xl p-4 hover:shadow-xl transition-all duration-200 group"
                                             style={{ borderColor: '#e5e7eb' }}
                                         >
-                                            {/* ⬇️ CHECKBOX EKLE ⬇️ */}
                                             <div className="flex items-start justify-between mb-3">
                                                 <input
                                                     type="checkbox"
