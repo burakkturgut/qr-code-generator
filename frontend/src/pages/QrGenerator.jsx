@@ -33,11 +33,18 @@ const QrGenerator = () => {
     const loadMyQrCodes = async () => {
         try {
             const response = await api.get("/api/qr/my-qr-codes");
-            setMyQrCodes(response.data);
+
+            const qrList = Array.isArray(response.data)
+                ? response.data
+                : response.data.qr_codes || response.data.data || [];
+
+            setMyQrCodes(qrList);
         } catch (err) {
             console.error("QR kodları yüklenemedi:", err);
+            setMyQrCodes([]); // fallback
         }
     };
+
 
     useEffect(() => {
         loadMyQrCodes();
@@ -258,8 +265,8 @@ const QrGenerator = () => {
                             </div>
                             <h1 className="text-2xl font-bold" style={{ color: '#1a1a1a' }}>{t('dashboard.title')}</h1>
                         </div>
-                        <div className="flex items-center space-x-3">
-                            <LanguageSwitcher />
+                        <div className="flex items-center space-x-3 px-2 sm:px-4">
+                            {/* <LanguageSwitcher />  silindi */}
                             <button
                                 onClick={() => navigate("/settings")}
                                 className="flex items-center space-x-2 px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:shadow-lg"
@@ -277,7 +284,7 @@ const QrGenerator = () => {
                             </button>
                             <button
                                 onClick={handleLogout}
-                                className="flex items-center space-x-2 px-4 py-2 text-white rounded-xl font-medium transition-all duration-300 hover:shadow-lg hover:scale-105"
+                                className="flex items-center space-x-2 px-2 sm:px-4 py-2 text-white rounded-xl font-medium transition-all duration-300 hover:shadow-lg hover:scale-105"
                                 style={{ background: 'linear-gradient(135deg, #8B1538 0%, #D4AF37 100%)' }}
                             >
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
